@@ -94,3 +94,14 @@ class Test(TestCase):
             print(record)
 
         db_functions.close_db(con)
+
+
+    def test_get_record(self):
+        con = db_functions.open_db()
+        self.test_get_fields()
+        sn_id = self.sample_sn_ids[0]
+        taxon = db_functions.get_record(con, 'taxon', 'scientificNameID', sn_id, self.taxon_fields)
+        self.assertTrue(taxon['scientificNameID']==sn_id)
+        species_profile = db_functions.get_record(con, 'speciesprofile', 'taxonID', sn_id, self.speciesprofile_fields)
+        self.assertTrue(species_profile['taxonID'] == sn_id)
+        db_functions.close_db(con)

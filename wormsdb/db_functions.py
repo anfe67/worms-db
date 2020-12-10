@@ -1,3 +1,4 @@
+""" Simple wrapper to query the WORMS database in SQLite format """
 import os
 import sqlite3 as lite
 import time
@@ -16,10 +17,6 @@ def open_db():
 # Close it after use
 def close_db(con):
     con.close()
-
-sample_sn_ids = ['urn:lsid:marinespecies.org:taxname:519212', 'urn:lsid:marinespecies.org:taxname:399249', 'urn:lsid:marinespecies.org:taxname:170605', '????????']
-semple_sn = ['Polymastia littoralis', 'Scorpaena cocosensis', 'Neoscopelarchoides', 'Pippo Pippo']
-
 
 
 def get_record(con, table, field_name, value, fields):
@@ -41,10 +38,3 @@ def get_record(con, table, field_name, value, fields):
         record = dict(zip(fields, retrieved_record))
 
     return record
-
-
-
-
-# con = open_db()
-# verify_querying()
-# close_db(con)
