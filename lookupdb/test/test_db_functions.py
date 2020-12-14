@@ -1,6 +1,6 @@
 from unittest import TestCase
-from wormsdb import db_functions
-import time
+from lookupdb import db_functions
+import time_qc
 
 
 class Test(TestCase):
@@ -36,7 +36,7 @@ class Test(TestCase):
         db_functions.open_db()
 
         # Querying for scientificNameID
-        start = time.time()
+        start = time_qc.time()
         for sn_id in self.sample_sn_ids:
             cur = db_functions.conn.execute(f"SELECT * from taxon where scientificNameID='{sn_id}'")
 
@@ -48,21 +48,21 @@ class Test(TestCase):
                 record = dict(zip(fields, taxon))
             print(record)
         print("************ WITH INDEX ************")
-        print(f" ----> {time.time() - start}")
+        print(f" ----> {time_qc.time() - start}")
         print("************************************")
 
         # Just querying, no zipping
-        start = time.time()
+        start = time_qc.time()
         for sn_id in self.sample_sn_ids:
             cur = db_functions.conn.execute(f"SELECT * from taxon where scientificNameID='{sn_id}'")
             taxon = cur.fetchone()
             print(taxon)
         print("************ WITHOUT ZIPPING ************")
-        print(f" ----> {time.time() - start}")
+        print(f" ----> {time_qc.time() - start}")
         print("*****************************************")
 
         # Querying for scientificName
-        start = time.time()
+        start = time_qc.time()
         for sn in self.semple_sns:
             cur = db_functions.conn.execute(f"SELECT * from taxon where scientificName='{sn}'")
             taxon = cur.fetchone()
@@ -74,7 +74,7 @@ class Test(TestCase):
             print(record)
 
         print("************ WITHOUT INDEX ************")
-        print(f" ----> {time.time() - start}")
+        print(f" ----> {time_qc.time() - start}")
         print("***************************************")
 
         # Querying for speciesprofile

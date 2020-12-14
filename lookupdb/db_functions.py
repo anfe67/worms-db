@@ -6,7 +6,7 @@ import sys
 # this is a pointer to the module object instance itself.
 this = sys.modules[__name__]
 this.conn = None
-this.database_location = os.path.join(os.path.dirname(__file__), 'database/WORMS.db')
+this.database_location = os.path.join(os.path.dirname(__file__), 'database/EUROBIS_QC_LOOKUP_DB.db')
 
 
 # Opening the worms database
